@@ -4,7 +4,7 @@ from time import strftime
 from types import FrameType  # using for pylint
 from typing import Union  # using for pylint
 from rich.console import Console
-from pylogger_extensions import *
+from .pylogger_extensions import *
 console = Console()
 
 for mode in loggers:
