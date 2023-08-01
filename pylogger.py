@@ -7,8 +7,6 @@ from rich.console import Console
 from pylogger_extensions import *
 console = Console()
 
-__version__ = "4.1.10"
-
 for mode in loggers:
     exec(f"def {mode}(_string:str,*,no_print:bool=False,auto_highlight:bool=False):log(__logMode(),_string,no_print=no_print,auto_highlight=auto_highlight)")
 if not os.path.exists("logs"):
