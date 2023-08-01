@@ -4,8 +4,52 @@ from time import strftime
 from types import FrameType  # using for pylint
 from typing import Union  # using for pylint
 from rich.console import Console
-from .pylogger_extensions import *
 console = Console()
+class Logger_InternalError(SyntaxError):pass
+loggers:dict[str,dict] = {
+    "message": {
+        "fore_color": "rgb(0, 255, 255)",
+        "back_color": '',
+        "extend_settings": "",
+        "available": True,
+    },
+    "info": {
+        "fore_color": "rgb(0, 255, 0)",
+        "back_color": '',
+        "extend_settings": "",
+        "available": True,
+    },
+    "warning": {
+        "fore_color": "rgb(255, 255, 0)",
+        "back_color": '',
+        "extend_settings": "",
+        "available": True,
+    },
+    "error": {
+        "fore_color": "rgb(255, 0, 0)",
+        "back_color": '',
+        "extend_settings": "",
+        "available": True,
+    },
+    "final": {
+        "fore_color": "rgb(255, 0, 0)",
+        "back_color": "rgb(255, 255, 0)",
+        "extend_settings": "bold",
+        "available": True,
+    },
+    "off": {
+        "fore_color": "rgb(100, 100, 100)",
+        "back_color": '',
+        "extend_settings": "",
+        "available": True,
+    },
+}
+def message(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
+def info(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
+def warning(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
+def error(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
+def final(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
+def off(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
 
 for mode in loggers:
     exec(f"def {mode}(_string:str,*,no_print:bool=False,auto_highlight:bool=False):log(__logMode(),_string,no_print=no_print,auto_highlight=auto_highlight)")
