@@ -1,0 +1,60 @@
+00:32:41 [INFO] <<module>> in test.py,line 2: test
+00:33:12 [INFO] <<module>> in test.py,line 2: test
+00:36:26 [INFO] <<module>> in test.py,line 2: test
+00:36:47 [WARNING] <<module>> in test.py,line 2: test
+00:39:03 [INFO] <<module>> in test.py,line 2: test_info
+00:39:03 [WARNING] <<module>> in test.py,line 3: test_warning
+00:39:03 [ERROR] <<module>> in test.py,line 4: test_error
+00:39:03 [FINAL] <<module>> in test.py,line 5: test_final
+00:39:03 [MESSAGE] <<module>> in test.py,line 6: test_message
+00:39:12 [INFO] <<module>> in test.py,line 2: test_info
+00:39:12 [WARNING] <<module>> in test.py,line 3: test_warning
+00:39:12 [ERROR] <<module>> in test.py,line 4: test_error
+00:39:12 [FINAL] <<module>> in test.py,line 5: test_final
+00:39:12 [MESSAGE] <<module>> in test.py,line 6: test_message
+00:39:12 [INFO] <test> in test.py,line 8: test_info_in_func
+00:39:12 [WARNING] <test> in test.py,line 9: test_warning_in_func
+00:39:12 [ERROR] <test> in test.py,line 10: test_error_in_func
+00:39:12 [FINAL] <test> in test.py,line 11: test_final_in_func
+00:39:12 [MESSAGE] <test> in test.py,line 12: test_message_in_func
+00:39:41 [INFO   ] <<module>> in test.py,line 3: test_info
+00:39:41 [WARNING] <<module>> in test.py,line 4: test_warning
+00:39:41 [ERROR  ] <<module>> in test.py,line 5: test_error
+00:39:41 [FINAL  ] <<module>> in test.py,line 6: test_final
+00:39:41 [MESSAGE] <<module>> in test.py,line 7: test_message
+00:39:41 [INFO   ] <test> in test.py,line 9: test_info_in_func
+00:39:41 [WARNING] <test> in test.py,line 10: test_warning_in_func
+00:39:41 [ERROR  ] <test> in test.py,line 11: test_error_in_func
+00:39:41 [FINAL  ] <test> in test.py,line 12: test_final_in_func
+00:39:41 [MESSAGE] <test> in test.py,line 13: test_message_in_func
+00:40:00 [INFO   ] <<module>> in test.py,line 3: test_info
+00:40:00 [WARNING] <<module>> in test.py,line 4: test_warning
+00:40:00 [ERROR  ] <<module>> in test.py,line 5: test_error
+00:40:00 [FINAL  ] <<module>> in test.py,line 6: test_final
+00:40:00 [MESSAGE] <<module>> in test.py,line 7: test_message
+00:40:00 [INFO   ] <test> in test.py,line 9: test_info_in_func
+00:40:00 [WARNING] <test> in test.py,line 10: test_warning_in_func
+00:40:00 [ERROR  ] <test> in test.py,line 11: test_error_in_func
+00:40:00 [FINAL  ] <test> in test.py,line 12: test_final_in_func
+00:40:00 [MESSAGE] <test> in test.py,line 13: test_message_in_func
+00:40:28 [INFO   ] <<module>> in test.py,line 3: test_info
+00:40:28 [WARNING] <<module>> in test.py,line 4: test_warning
+00:40:28 [ERROR  ] <<module>> in test.py,line 5: test_error
+00:40:28 [FINAL  ] <<module>> in test.py,line 6: test_final
+00:40:28 [MESSAGE] <<module>> in test.py,line 7: test_message
+00:40:28 [INFO   ] <test> in test.py,line 9: test_info_in_func
+00:40:28 [WARNING] <test> in test.py,line 10: test_warning_in_func
+00:40:28 [ERROR  ] <test> in test.py,line 11: test_error_in_func
+00:40:28 [FINAL  ] <test> in test.py,line 12: test_final_in_func
+00:40:28 [MESSAGE] <test> in test.py,line 13: test_message_in_func
+00:42:12 [INFO   ] <<module>> in test.py,line 3: test_info
+00:42:12 [WARNING] <<module>> in test.py,line 4: test_warning
+00:42:12 [ERROR  ] <<module>> in test.py,line 5: test_error
+00:42:12 [FINAL  ] <<module>> in test.py,line 6: test_final
+00:42:12 [MESSAGE] <<module>> in test.py,line 7: test_message
+00:42:12 [INFO   ] <test> in test.py,line 9: test_info_in_func
+00:42:12 [WARNING] <test> in test.py,line 10: test_warning_in_func
+00:42:12 [ERROR  ] <test> in test.py,line 11: test_error_in_func
+00:42:12 [FINAL  ] <test> in test.py,line 12: test_final_in_func
+00:42:12 [MESSAGE] <test> in test.py,line 13: test_message_in_func
+00:42:40 [INFO   ] <<module>> in test.py,line 3: test_info00:42:40 [WARNING] <<module>> in test.py,line 4: test_warning00:42:40 [ERROR  ] <<module>> in test.py,line 5: test_error00:42:40 [FINAL  ] <<module>> in test.py,line 6: test_final00:42:40 [MESSAGE] <<module>> in test.py,line 7: test_message00:42:40 [INFO   ] <test> in test.py,line 9: test_info_in_func00:42:40 [WARNING] <test> in test.py,line 10: test_warning_in_func00:42:40 [ERROR  ] <test> in test.py,line 11: test_error_in_func00:42:40 [FINAL  ] <test> in test.py,line 12: test_final_in_func00:42:40 [MESSAGE] <test> in test.py,line 13: test_message_in_func
