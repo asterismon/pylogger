@@ -1,2 +1,5 @@
-.mypy_cache
-test.py
+/.mypy_cache
+/test.py
+/__pycache__
+/logs
+/.vscode
