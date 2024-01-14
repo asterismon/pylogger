@@ -31,7 +31,7 @@ loggers:dict[str,dict] = {
         "extend_settings": "",
         "available": True,
     },
-    "final": {
+    "fatal": {
         "fore_color": "rgb(255, 0, 0)",
         "back_color": "rgb(255, 255, 0)",
         "extend_settings": "bold",
@@ -48,7 +48,7 @@ def message(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None
 def info(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
 def warning(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
 def error(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
-def final(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
+def fatal(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
 def off(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
 
 for mode in loggers:
