@@ -6,7 +6,7 @@ from typing import Union  # using for pylint
 from rich.console import Console
 console = Console()
 class Logger_InternalError(SyntaxError):pass
-loggers:dict[str,dict] = {
+loggers:dict[str,dict[str,str|bool]] = {
     "message": {
         "fore_color": "rgb(0, 255, 255)",
         "back_color": '',
@@ -49,7 +49,7 @@ def info(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:ra
 def warning(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
 def error(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
 def fatal(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
-def off(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
+def off(_string:str='',*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
 
 for mode in loggers:
     exec(f"def {mode}(_string:str,*,no_print:bool=False,auto_highlight:bool=False):log(__logMode(),_string,no_print=no_print,auto_highlight=auto_highlight)")
@@ -73,7 +73,7 @@ def __save():
     for mode in loggers:
         logger_extensions += f"def {mode}(_string:str,*,no_print:bool=False,auto_highlight:bool=False):raise Logger_InternalError"
         logger_extensions += "\n"
-    with open("./logger_extensions.py",'w') as f:
+    with open("./logger_extensions.py",'w',encoding='utf-8') as f:
         f.write(logger_extensions)
     update_LOCK = False
 
