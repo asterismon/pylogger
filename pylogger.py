@@ -147,21 +147,22 @@ def create(name: str, fore_color: str = "rgb(255, 255, 255)", back_color: str | 
 
 def log(mode: str, _string: str, no_print=False, auto_highlight: bool = False,more_func:Callable|None = None,*args,**kwargs):
     global loggers, minLength,level
-    if loggers[mode]["available"] and loggers[mode]["level"] >= level:
-        writeIn_log_mode = mode.upper()+" "*(minLength-len(mode))
-        time = strftime("%H:%M:%S")
-        value = f"{time} [{writeIn_log_mode}] {__name()}: {_string}"
-        __writeIn(value)
-        if no_print == False:
-            fore_color:str =loggers[mode]['fore_color'].replace(' ','')
-            back_color:str = loggers[mode]['back_color'].replace(' ','')
-            extend_settings:str = loggers[mode]['extend_settings']
-            console.print(
-                value,
-                highlight=auto_highlight,
-                style=f"{fore_color} on {back_color} {extend_settings}" if back_color 
-                else f"{fore_color} {extend_settings}",
-            )
+    if (not loggers[mode]["available"]) or loggers[mode]["level"] < level:
+        return
+    writeIn_log_mode = mode.upper()+" "*(minLength-len(mode))
+    time = strftime("%H:%M:%S")
+    value = f"{time} [{writeIn_log_mode}] {__name()}: {_string}"
+    __writeIn(value)
+    if no_print == False:
+        fore_color:str =loggers[mode]['fore_color'].replace(' ','')
+        back_color:str = loggers[mode]['back_color'].replace(' ','')
+        extend_settings:str = loggers[mode]['extend_settings']
+        console.print(
+            value,
+            highlight=auto_highlight,
+            style=f"{fore_color} on {back_color} {extend_settings}" if back_color 
+            else f"{fore_color} {extend_settings}",
+        )
     if more_func:
         more_func(args,kwargs)
 def logCleaner(logNum:int):
