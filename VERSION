@@ -1,3 +1,5 @@
-NOW 4.1.11
+NOW 4.2.0
+4.2.0:
+    添加了几种经典的日志设定,现在可以通过setDebug/setInfo/setWarning/setError/setOff(不是起飞,是关闭)来设定日志级别.每个内置级别之间为自定义保留了9个级别.
 4.1.11:
     不必额外导入pylogger_extensions了
