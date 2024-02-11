@@ -87,6 +87,10 @@ def setOff():
     global level
     level = float("inf")
 
+def setLevel(_level:int):
+    global level
+    level = _level
+
 def message(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
 def info(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
 def warning(_string:str,*,no_print:bool=False,auto_highlight:bool=False) -> None:raise Logger_InternalError
