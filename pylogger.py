@@ -9,7 +9,7 @@ from types import FrameType
 from typing import Callable
 from rich.console import Console
 
-__VERSION__ = "2.1.7"
+__VERSION__ = "2.1.8"
 
 
 class Logger:
@@ -108,6 +108,23 @@ class Logger:
                 kwargs=kwargs,
             )
 
+    def heartbeat(
+        self,
+        _string: str,
+        callback: Callable | None = None,
+        *args,
+        **kwargs,
+    ) -> None:
+        if self.level <= 0:
+            self.logger(
+                mode="heartbeat",
+                _string=_string,
+                fore_color="rgb(150,150,150)",
+                callback=callback,
+                args=args,
+                kwargs=kwargs,
+            )
+
     def info(
         self,
         _string: str,
@@ -172,23 +189,6 @@ class Logger:
                 _string=_string,
                 fore_color="rgb(255,0,0)",
                 back_color="rgb(255,255,0)",
-                callback=callback,
-                args=args,
-                kwargs=kwargs,
-            )
-
-    def heartbeat(
-        self,
-        _string: str,
-        callback: Callable | None = None,
-        *args,
-        **kwargs,
-    ) -> None:
-        if self.level <= 0:
-            self.logger(
-                mode="heartbeat",
-                _string=_string,
-                fore_color="rgb(150,150,150)",
                 callback=callback,
                 args=args,
                 kwargs=kwargs,
