@@ -11,8 +11,9 @@ from rich.console import Console
 
 __VERSION__ = "2.1.7"
 
+
 class Logger:
-    class mode:#调整日志级别
+    class mode:  # 调整日志级别
         ALL = -100
         DEBUG = -10
         NORMAL = 0
@@ -31,13 +32,14 @@ class Logger:
         filename: bool = True,
         line: bool = True,
         *,
+        save: bool = True,
         quiet: bool = False,
         auto_highlight: bool = False,
         logfile_max: int = 30,
-        kw_min: int = 7,
+        kw_min: int = 9,
         mode: int = mode.NORMAL,
     ) -> None:
-        '''
+        """
         初始化Logger
 
         Args:
@@ -47,12 +49,13 @@ class Logger:
             func_name: 显示函数名. 默认为True.
             filename: 显示文件名. 默认为True.
             line: 显示行数. 默认为True.
+            save: 是否保存为文件. 默认为True.
             quiet: 控制台静默. 默认为False.
             auto_highlight: rich自动语法高亮开关. 默认为False.
             logfile_max: 保留的旧日志文件数目. 默认为30.
             kw_min: Logger类型关键字长度. 默认为7.
             level: Logger日志级别. 默认为level.NORMAL.
-        '''        
+        """
         self.process = process
         self.thread = thread
         self.objID = objID
@@ -62,30 +65,14 @@ class Logger:
         self.logfile_max = logfile_max
         self.kw_min = kw_min
         self.level = mode
+        self.save = save
         self.quiet = quiet
         self.auto_highlight = auto_highlight
-        self.queue:Queue = Queue()
+        self.queue: Queue = Queue()
         self.console = Console()
         self.logfileCleaner()
         Thread(target=self.__listener, name="logWriter", daemon=True).start()
         return
-
-    def note(
-        self,
-        _string: str,
-        callback: Callable | None = None,
-        *args,
-        **kwargs,
-    ) -> None:
-        if self.level <= 0:
-            self.logger(
-                mode="note",
-                _string=_string,
-                fore_color="rgb(0,255,255)",
-                callback=callback,
-                args=args,
-                kwargs=kwargs,
-            )
 
     def debug(
         self,
@@ -98,7 +85,24 @@ class Logger:
             self.logger(
                 mode="debug",
                 _string=_string,
-                fore_color="rgb(150,150,150)",
+                fore_color="rgb(255,255,255)",
+                callback=callback,
+                args=args,
+                kwargs=kwargs,
+            )
+
+    def notice(
+        self,
+        _string: str,
+        callback: Callable | None = None,
+        *args,
+        **kwargs,
+    ) -> None:
+        if self.level <= 0:
+            self.logger(
+                mode="notice",
+                _string=_string,
+                fore_color="rgb(0,255,255)",
                 callback=callback,
                 args=args,
                 kwargs=kwargs,
@@ -173,6 +177,23 @@ class Logger:
                 kwargs=kwargs,
             )
 
+    def heartbeat(
+        self,
+        _string: str,
+        callback: Callable | None = None,
+        *args,
+        **kwargs,
+    ) -> None:
+        if self.level <= 0:
+            self.logger(
+                mode="heartbeat",
+                _string=_string,
+                fore_color="rgb(150,150,150)",
+                callback=callback,
+                args=args,
+                kwargs=kwargs,
+            )
+
     def panic(
         self,
         _string: str,
@@ -190,30 +211,6 @@ class Logger:
                 args=args,
                 kwargs=kwargs,
             )
-    
-    def logfileCleaner(self):
-        if not os.path.exists("logs"):
-            os.mkdir("logs")
-            return
-        logs = os.listdir("./logs")[::-1]
-        while len(logs) > self.logfile_max:
-            os.remove(logs.pop())
-
-    def __log(self):
-        using: FrameType = currentframe().f_back.f_back.f_back
-        filename = (
-            f" in {os.path.basename(using.f_code.co_filename)}" if self.filename else ""
-        )
-        cur_process = current_process()
-        process_id = f"(ID {id(cur_process)})" if self.objID else ""
-        process = f" <Process {cur_process.name}{process_id}>" if self.process else ""
-        cur_thread = current_thread()
-        thread_id = f"(ID {id(cur_thread)})" if self.objID else ""
-        thread = f" <Thread {cur_thread.name}{thread_id}>" if self.thread else ""
-        objID = f" (ID {id(using.f_code)})" if self.objID else ""
-        func_name = f" <{using.f_code.co_name}{objID}>" if self.func_name else ""
-        line = f" ,line {using.f_lineno}" if self.line else ""
-        return process + thread + func_name + filename + line
 
     def logger(
         self,
@@ -244,20 +241,46 @@ class Logger:
         if callback:
             callback(args, kwargs)
 
+    def setLevel(self, level: int | mode):
+        self.level = level
+
+    def logfileCleaner(self):
+        if not os.path.exists("logs"):
+            os.mkdir("logs")
+            return
+        logs = os.listdir("./logs")[::-1]
+        while len(logs) > self.logfile_max:
+            os.remove(logs.pop())
+
+    def __log(self):
+        using: FrameType = currentframe().f_back.f_back.f_back
+        filename = (
+            f" in {os.path.basename(using.f_code.co_filename)}" if self.filename else ""
+        )
+        cur_process = current_process()
+        process_id = f"(ID {id(cur_process)})" if self.objID else ""
+        process = f" <Process {cur_process.name}{process_id}>" if self.process else ""
+        cur_thread = current_thread()
+        thread_id = f"(ID {id(cur_thread)})" if self.objID else ""
+        thread = f" <Thread {cur_thread.name}{thread_id}>" if self.thread else ""
+        objID = f" (ID {id(using.f_code)})" if self.objID else ""
+        func_name = f" <{using.f_code.co_name}{objID}>" if self.func_name else ""
+        line = f" ,line {using.f_lineno}" if self.line else ""
+        return process + thread + func_name + filename + line
+
     def __listener(self):
         try:
-            with open(
-                "./logs/" + strftime("%Y-%m-%d") + ".log", "x", encoding="utf-8"
-            ) as f:
-                pass
+            if self.save:
+                with open(
+                    "./logs/" + strftime("%Y-%m-%d") + ".log", "x", encoding="utf-8"
+                ):
+                    pass
         finally:
             while True:
                 log = self.queue.get()
-                with open(
-                    "./logs/" + strftime("%Y-%m-%d") + ".log", "a", encoding="utf-8"
-                ) as f:
-                    f.write(log)
-                    self.queue.task_done()
-
-    def setLevel(self, level: int | mode):
-        self.level = level
+                if self.save:
+                    with open(
+                        "./logs/" + strftime("%Y-%m-%d") + ".log", "a", encoding="utf-8"
+                    ) as f:
+                        f.write(log)
+                self.queue.task_done()
